@@ -17,7 +17,7 @@ class FoodEntry:
 class FoodEntryModel(Base):
     __tablename__: str = 'food_entries'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
     food = Column(Text, nullable=False)
     calories = Column(Integer, nullable=False)
