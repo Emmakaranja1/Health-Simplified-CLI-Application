@@ -9,15 +9,15 @@ from db.database import Base
 class Goal:
     id: Optional[int]
     user_id: int
-    daily_goal: Optional[Any] = None
-    weekly_goal: Optional[Any] = None
+    daily_goal: Optional[str] = None
+    weekly_goal: Optional[str] = None
     created_at: Optional[datetime] = None
 
 
 class GoalModel(Base):
     __tablename__ = 'goals'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
     daily_goal = Column(Text, nullable=True)    # Changed to Text and nullable
     weekly_goal = Column(Text, nullable=True)   # Changed to Text and nullable
