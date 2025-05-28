@@ -13,7 +13,7 @@ class User:
 class UserModel(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column(Text, nullable=False)
 
     def __init__(self, name):
