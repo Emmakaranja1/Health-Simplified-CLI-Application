@@ -10,14 +10,14 @@ class MealPlan:
     id: Optional[int]
     user_id: int
     week_number: int
-    description: Optional[str]
+    description: Optional[str] = None
     created_at: Optional[datetime] = None
 
 
 class MealPlanModel(Base):
     __tablename__ = 'meal_plans'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
     week_number = Column(Integer, nullable=False)
     description = Column(Text)
