@@ -23,11 +23,11 @@ class FoodEntryModel(Base):
     calories = Column(Integer, nullable=False)
     entry_date = Column(Date, nullable=False)
 
-   # def(self, user_id, food, calories, entry_date):
-        #self.user_id = user_id
-        #self.food = food
-        #self.calories = calories
-        #self.entry_date = entry_date
+    def  __init__(self, user_id, food, calories, entry_date):
+        self.user_id = user_id
+        self.food = food
+        self.calories = calories
+        self.entry_date = entry_date
 
     def __repr__(self):
         return (f"<FoodEntry(id={self.id}, user_id={self.user_id}, "
