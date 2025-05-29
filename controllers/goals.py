@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.goal import GoalModel, Goal
+from models.goals import GoalModel, Goal
 from db.database import get_db
 
 
