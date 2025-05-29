@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.food_entry import FoodEntryModel, FoodEntry
+from models.food_entries import FoodEntryModel, FoodEntry
 from db.database import get_db
 
 
