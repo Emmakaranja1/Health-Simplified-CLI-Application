@@ -7,11 +7,11 @@ from db.database import Base
 
 @dataclass
 class FoodEntry:
-    id: Optional[int]
     user_id: int
     food: str
     calories: int
     entry_date: date
+    id: Optional[int] = None
 
 
 class FoodEntryModel(Base):
