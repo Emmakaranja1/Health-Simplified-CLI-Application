@@ -1,15 +1,16 @@
 from sqlalchemy.orm import Session
+
+from models import UserModel
 from models.goals import GoalModel, Goal
 from db.database import get_db
 
 
 # List all goals
-def list_goals(session: Session):
-    goals = session.query(GoalModel).all()
-    # Optionally convert to dataclass instances
-    # return [Goal(id=g.id, user_id=g.user_id, daily_goal=g.daily_goal, weekly_goal=g.weekly_goal, created_at=g.created_at) for g in goals]
-    return goals
-
+def list_goals(session: Session, user_name: str):
+    user = session.query(UserModel).filter(UserModel.name == user_name).first()
+    if not user:
+        return []
+    return session.query(GoalModel).filter(GoalModel.user_id == user.id).all()
 
 # Get one goal by id
 def get_goal(goal_id: int, session: Session):
@@ -52,4 +53,22 @@ def delete_goal(goal_id: int, session: Session):
     goal = session.query(GoalModel).filter(GoalModel.id == goal_id).first()
     if goal:
         return goal.delete(session)
+    return None
+
+
+def set_goal(db: Session, user_name: str, daily: str, weekly: str):
+    user_obj = db.query(UserModel).filter(UserModel.name == user_name).first()
+    if not user_obj:
+        return False  # or raise an error if preferred
+
+    goal = db.query(GoalModel).filter(GoalModel.user_id == user_obj.id).first()
+    if goal:
+        goal.daily_goal = daily
+        goal.weekly_goal = weekly
+    else:
+        goal = GoalModel(user_id=user_obj.id, daily_goal=daily, weekly_goal=weekly)
+        db.add(goal)
+
+    db.commit()
+    return True
     return None
